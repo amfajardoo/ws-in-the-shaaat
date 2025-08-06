@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Firebase } from '../../services/firebase';
+import { Authentication } from '../../auth/authentication';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +11,9 @@ import { Firebase } from '../../services/firebase';
   },
 })
 export default class Login {
-  private firebase = inject(Firebase);
+  #auth = inject(Authentication);
 
   loginWithGoogle() {
-    this.firebase.loginWithGoogle();
+    this.#auth.loginWithGoogle();
   }
 }

@@ -1,1 +1,5 @@
-<router-outlet />
+@if (authReady()) {
+  <router-outlet />
+} @else {
+  <app-loading-session />
+}

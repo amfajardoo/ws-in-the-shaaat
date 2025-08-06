@@ -1,15 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { Firebase } from '../../services/firebase';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Authentication } from '../../auth/authentication';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
+  imports: [ReactiveFormsModule],
 })
 export default class Home {
-  firebase = inject(Firebase);
+  #auth = inject(Authentication);
 
   logout() {
-    this.firebase.logout();
+    this.#auth.logout();
+  }
+
+  onSubmit() {}
+
+  get user() {
+    return this.#auth.user();
   }
 }
