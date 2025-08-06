@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Authentication } from '../../auth/authentication';
+import { Authentication } from '@auth/authentication';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Authentication } from './auth/authentication';
-import { LoadingSession } from './components/loading-session/loading-session';
+import { Authentication } from '@auth/authentication';
+import { LoadingSession } from '@components/loading-session/loading-session';
 
 @Component({
   selector: 'app-root',

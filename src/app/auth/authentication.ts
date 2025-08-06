@@ -8,10 +8,10 @@ import {
   UserCredential,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UsersDataClient } from '@collections/users-data-client';
 import { debounceTime, map, shareReplay, startWith } from 'rxjs';
-import { UsersDataClient } from '../collections/users-data-client';
 
-const TWO_SECONDS = 2000;
+const ONE_SECOND = 1000;
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class Authentication {
   #router = inject(Router);
   authState$ = authState(this.#auth);
   isAuthReady$ = this.authState$.pipe(
-    debounceTime(TWO_SECONDS),
+    debounceTime(ONE_SECOND),
     map(() => true),
     startWith(false),
     shareReplay(1),
