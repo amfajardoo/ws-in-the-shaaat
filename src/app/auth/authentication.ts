@@ -8,7 +8,7 @@ import {
   UserCredential,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { UsersDataClient } from '@collections/users-data-client';
+import { UsersDataClient } from '@collections/users/users-data-client';
 import { debounceTime, map, shareReplay, startWith } from 'rxjs';
 
 const ONE_SECOND = 1000;
