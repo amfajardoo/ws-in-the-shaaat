@@ -11,7 +11,7 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Authentication } from '@auth/authentication';
-import { Users } from '@collections/users';
+import { UserDocument } from '@collections/users';
 import { collections } from '..';
 import { ContactsDataClient } from '../contacts/contacts-data-client';
 import { UsersDataClient } from '../users/users-data-client';
@@ -24,7 +24,7 @@ export class UserContactsDataClient {
   #auth = inject(Authentication);
   #usersDataClient = inject(UsersDataClient);
   #contactsDataClient = inject(ContactsDataClient);
-  contactsListResource = resource<Users[], User | null>({
+  contactsListResource = resource<UserDocument[], User | null>({
     params: this.#auth.user,
     loader: ({ params }) => {
       if (!params) {
@@ -47,7 +47,7 @@ export class UserContactsDataClient {
     });
   }
 
-  async #getUserContactProfiles(userId: string): Promise<Users[]> {
+  async #getUserContactProfiles(userId: string): Promise<UserDocument[]> {
     const contactsRef = collection(this.#firestore, collections.contacts);
     const q = query(
       contactsRef,
@@ -63,11 +63,11 @@ export class UserContactsDataClient {
           doc(this.#firestore, collections.users, id),
         );
         return userDoc.exists()
-          ? ({ uid: id, ...userDoc.data() } as Users)
+          ? ({ uid: id, ...userDoc.data() } as UserDocument)
           : null;
       }),
     );
 
-    return profiles.filter(Boolean) as Users[];
+    return profiles.filter(Boolean) as UserDocument[];
   }
 }

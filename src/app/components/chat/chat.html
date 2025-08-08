@@ -1,0 +1,68 @@
+@let contactDetails = contact();
+
+<section class="bg-gray-700 flex items-center justify-center min-h-screen">
+  <div
+    class="w-full max-w-md h-[600px] bg-white shadow-xl rounded-lg flex flex-col overflow-hidden"
+  >
+    <!-- Header tipo WhatsApp -->
+    <div class="bg-[#075e54] text-white px-4 py-3 flex items-center gap-2">
+      <div class="w-8 h-8 bg-gray-300 rounded-full">
+        <img
+          [ngSrc]="contactDetails.photoURL"
+          [alt]="'photo'"
+          width="32"
+          height="32"
+          class="w-8 h-8 rounded-full mb-2"
+        />
+      </div>
+      <div class="text-sm font-semibold">
+        {{ contactDetails.displayName }}
+      </div>
+    </div>
+
+    <!-- Mensajes -->
+    <div class="flex-1 p-4 overflow-y-auto space-y-2 bg-[#e5ddd5]">
+      @for (message of messagesResource.value(); track message.id) {
+        <!-- Mensaje de la otra persona -->
+        @if (message.senderId === contactDetails.uid) {
+          <div class="flex flex-col items-start gap-2">
+            <div
+              class="bg-gray-700 text-sm px-4 py-2 rounded-xl rounded-bl-none shadow max-w-[75%]"
+            >
+              {{ message.text }}
+            </div>
+          </div>
+        } @else {
+          <!-- Mensaje del usuario -->
+          <div class="flex flex-col items-end gap-2">
+            <div
+              class="bg-[#5c992e] text-sm px-4 py-2 rounded-xl rounded-br-none shadow max-w-[75%]"
+            >
+              {{ message.text }}
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <form
+      [formGroup]="messageForm"
+      (ngSubmit)="sendMessage()"
+      class="border-t bg-white px-3 py-2 flex items-center gap-2"
+    >
+      <input
+        type="text"
+        formControlName="message"
+        placeholder="Escribe un mensaje"
+        class="flex-1 px-4 py-2 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#5c992e] text-black"
+      />
+      <button
+        type="submit"
+        class="bg-[#5c992e] text-white px-4 py-2 text-sm rounded-full hover:bg-[#1ebd5a] transition cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
+        [disabled]="messageForm.invalid"
+      >
+        Enviar
+      </button>
+    </form>
+  </div>
+</section>

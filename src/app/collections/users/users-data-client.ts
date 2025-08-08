@@ -7,10 +7,11 @@ import {
   getDoc,
   getDocs,
   query,
+  serverTimestamp,
   setDoc,
   where,
 } from '@angular/fire/firestore';
-import { Users } from '.';
+import { UserDocument } from '.';
 import { collections } from '..';
 
 @Injectable({
@@ -32,19 +33,19 @@ export class UsersDataClient {
       email,
       displayName: user.displayName || '',
       photoUrl: user.photoURL || '',
-      createdAt: new Date().toISOString(),
+      createdAt: serverTimestamp(),
     });
   }
 
-  async getUserProfile(userId: string): Promise<Users | null> {
+  async getUserProfile(userId: string): Promise<UserDocument | null> {
     const userDocRef = doc(this.#firestore, collections.users, userId);
     const userDocSnapshot = await getDoc(userDocRef);
     return userDocSnapshot.exists()
-      ? ({ uid: userId, ...userDocSnapshot.data() } as Users)
+      ? ({ uid: userId, ...userDocSnapshot.data() } as UserDocument)
       : null;
   }
 
-  async getUserProfileByEmail(email: string): Promise<Users | null> {
+  async getUserProfileByEmail(email: string): Promise<UserDocument | null> {
     const usersRef = collection(this.#firestore, collections.users);
     const q = query(usersRef, where('email', '==', email));
     const snapshot = await getDocs(q);
@@ -52,6 +53,6 @@ export class UsersDataClient {
       return null;
     }
     const userDoc = snapshot.docs[0];
-    return { uid: userDoc.id, ...userDoc.data() } as Users;
+    return { uid: userDoc.id, ...userDoc.data() } as UserDocument;
   }
 }
