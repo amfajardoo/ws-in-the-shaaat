@@ -1,4 +1,4 @@
-export interface ContactDocument {
+export interface Contact {
   userId: string;
   contactId: string;
 }

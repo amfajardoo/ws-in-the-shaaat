@@ -24,21 +24,27 @@
     <div class="flex-1 p-4 overflow-y-auto space-y-2 bg-[#e5ddd5]">
       @for (message of messagesResource.value(); track message.id) {
         <!-- Mensaje de la otra persona -->
-        @if (message.senderId === contactDetails.uid) {
+        @if (message.senderId === contactDetails.id) {
           <div class="flex flex-col items-start gap-2">
             <div
-              class="bg-gray-700 text-sm px-4 py-2 rounded-xl rounded-bl-none shadow max-w-[75%]"
+              class="bg-gray-700 text-sm px-4 py-2 rounded-xl rounded-bl-none shadow max-w-[75%] flex flex-col"
             >
-              {{ message.text }}
+              <span>{{ message.text }}</span>
+              <small>{{
+                message.timestamp | fromServerTimestampToLocalString
+              }}</small>
             </div>
           </div>
         } @else {
           <!-- Mensaje del usuario -->
           <div class="flex flex-col items-end gap-2">
             <div
-              class="bg-[#5c992e] text-sm px-4 py-2 rounded-xl rounded-br-none shadow max-w-[75%]"
+              class="bg-[#5c992e] text-sm px-4 py-2 rounded-xl rounded-br-none shadow max-w-[75%] flex flex-col"
             >
-              {{ message.text }}
+              <span>{{ message.text }}</span>
+              <small>{{
+                message.timestamp | fromServerTimestampToLocalString
+              }}</small>
             </div>
           </div>
         }

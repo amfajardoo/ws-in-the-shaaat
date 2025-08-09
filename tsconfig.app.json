@@ -12,7 +12,8 @@
       "@shared/*": ["src/app/shared/*"],
       "@components/*": ["src/app/components/*"],
       "@pages/*": ["src/app/pages/*"],
-      "@interfaces/*": ["src/app/interfaces/*"]
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@repositories/*": ["src/app/repositories/*"]
     }
   },
   "include": ["src/**/*.ts"],

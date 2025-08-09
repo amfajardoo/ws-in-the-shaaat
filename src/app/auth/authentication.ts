@@ -3,13 +3,25 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import {
   Auth,
   authState,
+  User as FireUser,
   GoogleAuthProvider,
   signInWithPopup,
   UserCredential,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { UsersDataClient } from '@collections/users/users-data-client';
-import { debounceTime, map, shareReplay, startWith } from 'rxjs';
+import { User } from '@interfaces/users';
+import { UsersRepository } from '@repositories/users.repository';
+import {
+  debounceTime,
+  from,
+  map,
+  Observable,
+  of,
+  shareReplay,
+  startWith,
+  switchMap,
+} from 'rxjs';
+import { FirebaseDataClient } from '../firebase-data.client';
 
 const ONE_SECOND = 1000;
 
@@ -17,10 +29,20 @@ const ONE_SECOND = 1000;
   providedIn: 'root',
 })
 export class Authentication {
+  #firebase = inject(FirebaseDataClient);
   #auth: Auth = inject(Auth);
-  #usersDataClient = inject(UsersDataClient);
+  #usersDataClient = inject(UsersRepository);
   #router = inject(Router);
-  authState$ = authState(this.#auth);
+  authState$: Observable<User | null> = authState(this.#auth).pipe(
+    switchMap((user: FireUser | null) => {
+      if (!user) {
+        return of(null);
+      }
+
+      const userDoc = this.#firebase.getById<User>('users', user.uid);
+      return from(userDoc);
+    }),
+  );
   isAuthReady$ = this.authState$.pipe(
     debounceTime(ONE_SECOND),
     map(() => true),
@@ -44,12 +66,8 @@ export class Authentication {
       this.#auth,
       new GoogleAuthProvider(),
     );
-    const user = userCredentials.user;
-    const userId = user.uid;
-    const userExists = await this.#usersDataClient.verifyUserExists(userId);
-    if (!userExists) {
-      this.#usersDataClient.createUserDocument(user);
-    }
+
+    this.#usersDataClient.createUserDocument(userCredentials.user);
   }
 
   logout(): void {

@@ -8,10 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Authentication } from '@auth/authentication';
-import { ChatManager } from '@collections/chat-manager/chat-manager';
-import { UserContactsDataClient } from '@collections/helpers/user-contacts-data-client';
-import { UserDocument } from '@collections/users';
 import { Chat } from '@components/chat/chat';
+import { User } from '@interfaces/users';
+import { ChatsRepository } from '@repositories/chats.repository';
+import { ContactsRepository } from '@repositories/contacts.repository';
 
 interface ContactForm {
   contactEmail: FormControl<string>;
@@ -26,12 +26,12 @@ interface ContactForm {
 export default class Home {
   #auth = inject(Authentication);
   #fb = inject(NonNullableFormBuilder);
-  #usersContactsDataClient = inject(UserContactsDataClient);
-  #chatManager = inject(ChatManager);
+  #usersContactsDataClient = inject(ContactsRepository);
+  #chatManager = inject(ChatsRepository);
 
   form: FormGroup<ContactForm> = this.createContactForm();
   contactsListResource = this.#usersContactsDataClient.contactsListResource;
-  currentContact = signal<UserDocument | null>(null);
+  currentContact = signal<User | null>(null);
   chatIdWithCurrentContact = signal<string | null>(null);
 
   logout() {
@@ -48,7 +48,7 @@ export default class Home {
   }
 
   onSubmit() {
-    const userId = this.#auth.user()?.uid;
+    const userId = this.#auth.user()?.id;
     if (this.form.valid && userId) {
       const contactEmail = this.form.getRawValue().contactEmail;
 
@@ -56,18 +56,18 @@ export default class Home {
     }
   }
 
-  async startChat(contact: UserDocument) {
-    const userId = this.#auth.user()?.uid;
+  async startChat(contact: User) {
+    const userId = this.#auth.user()?.id;
     if (!userId) {
       return;
     }
 
     const chatExists = await this.#chatManager.verifyChatExists(
-      this.#auth.user()?.uid || '',
-      contact.uid,
+      this.#auth.user()?.id || '',
+      contact.id,
     );
     if (!chatExists) {
-      const participants = [userId, contact.uid];
+      const participants = [userId, contact.id];
       const chatId = await this.#chatManager.createChat(participants);
       this.chatIdWithCurrentContact.set(chatId);
     } else {

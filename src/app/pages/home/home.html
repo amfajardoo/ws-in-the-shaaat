@@ -31,7 +31,7 @@
 <main class="bg-gray-900 text-white min-h-screen font-sans">
   @if (contactsListResource.hasValue()) {
     @let contactsList = contactsListResource.value();
-    @for (contact of contactsList; track contact.uid) {
+    @for (contact of contactsList; track contact.id) {
       <div
         class="p-4 border-b border-gray-700 flex items-center gap-4 cursor-pointer"
         (click)="startChat(contact)"
