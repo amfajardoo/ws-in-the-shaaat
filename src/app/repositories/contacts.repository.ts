@@ -1,8 +1,8 @@
 import { Injectable, inject, resource } from '@angular/core';
 import { or, where } from '@angular/fire/firestore';
-import { Authentication } from '@auth/authentication';
 import { Contact } from '@interfaces/contact';
 import { User } from '@interfaces/users';
+import { Authentication } from '@pages/login/auth/authentication';
 import { FirebaseDataClient } from '../firebase-data.client';
 import { UsersRepository } from './users.repository';
 

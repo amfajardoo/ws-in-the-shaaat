@@ -21,7 +21,7 @@ import {
   startWith,
   switchMap,
 } from 'rxjs';
-import { FirebaseDataClient } from '../firebase-data.client';
+import { FirebaseDataClient } from 'src/app/firebase-data.client';
 
 const ONE_SECOND = 1000;
 

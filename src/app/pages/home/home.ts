@@ -7,9 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Authentication } from '@auth/authentication';
 import { Chat } from '@components/chat/chat';
 import { User } from '@interfaces/users';
+import { Authentication } from '@pages/login/auth/authentication';
 import { ChatsRepository } from '@repositories/chats.repository';
 import { ContactsRepository } from '@repositories/contacts.repository';
 

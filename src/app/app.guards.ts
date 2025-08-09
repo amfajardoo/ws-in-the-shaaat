@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, CanMatchFn } from '@angular/router';
-import { Authentication } from '@auth/authentication';
+import { Authentication } from '@pages/login/auth/authentication';
 import { filter, first, map } from 'rxjs/operators';
 
 export const waitForAuthReady: CanMatchFn = () => {

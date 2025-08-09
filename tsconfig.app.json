@@ -8,7 +8,6 @@
     "baseUrl": "./",
     "paths": {
       "@collections/*": ["src/app/collections/*"],
-      "@auth/*": ["src/app/auth/*"],
       "@shared/*": ["src/app/shared/*"],
       "@components/*": ["src/app/components/*"],
       "@pages/*": ["src/app/pages/*"],

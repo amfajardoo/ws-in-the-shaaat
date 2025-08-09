@@ -1,8 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, effect, inject, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Authentication } from '@auth/authentication';
 import { User } from '@interfaces/users';
+import { Authentication } from '@pages/login/auth/authentication';
 import { ChatsRepository } from '@repositories/chats.repository';
 import { FromServerTimestampToLocalStringPipe } from './from-server-timestamp-to-local-string-pipe';
 
