@@ -2,8 +2,6 @@
 
 **WsInTheShaaat** is a modern, real-time chat application built with Angular, Firebase, and TailwindCSS. Connect, chat, and share in a sleek, WhatsApp-inspired interface—right from your browser.
 
-![WsInTheShaaat Screenshot](public/screenshot.png) <!-- Add a screenshot if available -->
-
 ---
 
 ## ✨ Features
@@ -71,12 +69,6 @@
 ## 🤝 Contributing
 
 Pull requests and issues are welcome! Please open an issue to discuss your idea or bug before submitting a PR.
-
----
-
-## 📄 License
-
-MIT
 
 ---
 
