@@ -55,7 +55,9 @@ export class ContactsRepository {
       or(where('userId', '==', userId), where('contactId', '==', userId)),
     );
     const contacts = await this.#firebase.getMany<Contact>(q);
-    const contactIds = contacts.map((c) => c.contactId);
+    const contactIds = contacts
+      .filter((c) => c.contactId !== userId)
+      .map((c) => c.contactId);
 
     const profiles = await Promise.all(
       contactIds.map((id) => this.#usersRepo.getUserProfile(id)),
