@@ -37,7 +37,6 @@ export class FirebaseDataClient {
     return query(this.getCollectionRef<T>(path), ...queryConstraints);
   }
 
-  // --- Métodos de Operaciones ---
   async create<T>(path: string, data: T): Promise<string> {
     const docRef = await addDoc(this.getCollectionRef<T>(path), data);
     return docRef.id;
