@@ -1,59 +1,83 @@
-# WsInTheShaaat
+# WsInTheShaaat 🚀
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
+**WsInTheShaaat** is a modern, real-time chat application built with Angular, Firebase, and TailwindCSS. Connect, chat, and share in a sleek, WhatsApp-inspired interface—right from your browser.
 
-## Development server
+![WsInTheShaaat Screenshot](public/screenshot.png) <!-- Add a screenshot if available -->
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## ✨ Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Google Authentication** – Secure sign-in with your Google account.
+- **Contact Management** – Add contacts by email and see your friends list.
+- **1:1 Real-Time Chat** – Instant messaging with live updates.
+- **Responsive UI** – Beautiful, mobile-friendly design powered by TailwindCSS.
+- **Server-Side Rendering (SSR)** – Fast loads and SEO-friendly.
+- **Loading Animations** – Smooth session transitions for a premium feel.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🚦 Quick Start
 
-```bash
-ng generate component component-name
-```
+1. **Clone the repo:**
+   ```sh
+   git clone https://github.com/your-username/ws-in-the-shaaat.git
+   cd ws-in-the-shaaat
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
 
-```bash
-ng generate --help
-```
+3. **Configure Firebase:**
+   - Update your Firebase credentials in [`src/app/app.config.ts`](src/app/app.config.ts).
 
-## Building
+4. **Run the dev server:**
+   ```sh
+   npm start
+   ```
+   Visit [http://localhost:4200](http://localhost:4200) to chat!
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🛠️ Scripts
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **Start Dev Server:**  
+  `npm start`
 
-## Running unit tests
+- **Build for Production:**  
+  `npm run build`
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **SSR Mode:**  
+  `npm run serve:ssr:ws-in-the-shaaat`
 
-```bash
-ng test
-```
+- **Run Unit Tests:**  
+  `npm test`
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🗂️ Project Structure
 
-```bash
-ng e2e
-```
+- [`src/app/`](src/app/) – Main app code (components, pages, repositories)
+- [`src/app/components/chat/`](src/app/components/chat/) – Chat UI and logic
+- [`src/app/pages/home/`](src/app/pages/home/) – Home/dashboard page
+- [`src/app/pages/login/`](src/app/pages/login/) – Login page
+- [`src/app/repositories/`](src/app/repositories/) – Data access (users, contacts, chats)
+- [`public/`](public/) – Static assets
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## 🤝 Contributing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Pull requests and issues are welcome! Please open an issue to discuss your idea or bug before submitting a PR.
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+> Made with ❤️ using Angular, Firebase, and
